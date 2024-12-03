@@ -31,11 +31,14 @@ class Program
 
             Console.WriteLine($"Distance = {distance}");
 
-            // Part2: Compute Similarity - For each list get the count of each element
+            // Part2: Compute Similarity - Note: this is sub-optimal as the lists are already sorted
+            
+            // a) For each list get the count of each element
 
             var list1ElementCount = list1.GroupBy(x => x).Select(x => new { x.Key, Count = x.Count() }).ToList();
             var list2ElementCount = list2.GroupBy(x => x).Select(x => new { x.Key, Count = x.Count() }).ToList();
 
+            // b) Then join the two lists on the key and the similarity = Sum(key * list1Count * list2Count)
             var similarity = list1ElementCount.Join(list2ElementCount, l1 => l1.Key, l2 => l2.Key, (l1, l2) => (long)l1.Key * l1.Count * l2.Count).Sum();
 
             Console.WriteLine($"Similarity = {similarity}");
@@ -54,6 +57,8 @@ class Program
     {
         var list1 = new List<int>();
         var list2 = new List<int>();
+
+        // NOTE: this can be optimized for memory allocation/performance if needed
 
         var lineArray = await File.ReadAllLinesAsync(filename);
         foreach (var line in lineArray)
