@@ -23,12 +23,22 @@ class Program
             list1.Sort();
             list2.Sort();
 
+            // Part1: Compute distance - now that we have the lists sorted, just compute the difference
+
             Debug.Assert(list1.Count == list2.Count);
 
             var distance = list1.Zip(list2).Select(x => (long)Math.Abs(x.First - x.Second)).Sum();
 
             Console.WriteLine($"Distance = {distance}");
 
+            // Part2: Compute Similarity - For each list get the count of each element
+
+            var list1ElementCount = list1.GroupBy(x => x).Select(x => new { x.Key, Count = x.Count() }).ToList();
+            var list2ElementCount = list2.GroupBy(x => x).Select(x => new { x.Key, Count = x.Count() }).ToList();
+
+            var similarity = list1ElementCount.Join(list2ElementCount, l1 => l1.Key, l2 => l2.Key, (l1, l2) => (long)l1.Key * l1.Count * l2.Count).Sum();
+
+            Console.WriteLine($"Similarity = {similarity}");
         }
         catch (Exception e)
         {
@@ -69,6 +79,8 @@ class Program
 
         return (list1, list2);
     }
+
+
 
 }
 
