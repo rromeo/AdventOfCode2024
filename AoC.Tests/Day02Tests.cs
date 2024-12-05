@@ -33,5 +33,18 @@ namespace AoC.Tests
             CollectionAssert.AreEqual(expected, isSafeList);
         }
 
+        [TestMethod]
+        public void Part2() 
+        {
+            var lines = testData.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries);
+            var reports = Day02.Program.ParseIntDataByRow(lines);
+
+            var isSafeList = reports.Select(report => Day02.Program.IsDampenedReportSafe(report)).ToList();
+            List<bool> expected = [true, false, false, true, true, true];
+
+            CollectionAssert.AreEqual(expected, isSafeList);
+        }
+
+
     }
 }

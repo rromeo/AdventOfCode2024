@@ -58,6 +58,11 @@ public class Program
         return true;
     }
 
+    public static bool IsDampenedReportSafe(List<int> report)
+    {
+        throw new NotImplementedException();
+    }
+
     private static List<int> ParseIntRow(string line)
     {
         string[] split = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
