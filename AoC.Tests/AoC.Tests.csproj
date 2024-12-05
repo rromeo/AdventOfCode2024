@@ -1,0 +1,16 @@
+﻿<Project Sdk="MSTest.Sdk/3.6.1">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseVSTest>false</UseVSTest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Day01\Day01.csproj" />
+    <ProjectReference Include="..\Day02\Day02.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace Day02;
 
-internal class Program
+public class Program
 {
     const string fileName = "input.txt";
-    static async Task Main(string[] args)
+    static async Task<int> Main(string[] args)
     {
-
-        var lineArray = await File.ReadAllLinesAsync(fileName);
-
         try
         {
-            foreach (var line in ParseIntDataByRow(lineArray))
-            {
+            var lineArray = await File.ReadAllLinesAsync(fileName);
 
-            };
+            var count = lineArray.Select(x => IsReportSafe(ParseIntRow(x))).Count(x => x);
 
+            Console.WriteLine(count);
+
+            return 0;
         }
         catch (Exception ex) 
         { 
-        
+            Console.Error.WriteLine(ex);
+            return 1;
         }
 
     }
 
-    public static bool IsSafe(List<int> report)
+    public static bool IsReportSafe(List<int> report)
     {
         bool? isIncreasing = null;
 
@@ -57,6 +57,22 @@ internal class Program
 
         return true;
     }
+
+    private static List<int> ParseIntRow(string line)
+    {
+        string[] split = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (split.Length == 0)
+            return [];
+
+        var row = new List<int>();
+        for (int i = 0; i < split.Length; i++)
+        {
+            row.Add(int.Parse(split[i]));
+        }
+
+        return row;
+    }
+
 
     public static List<List<int>> ParseIntDataByRow(string[] lines)
     {
