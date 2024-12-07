@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
+﻿
 using System.Text.RegularExpressions;
 
 namespace Day03;
@@ -12,12 +11,18 @@ public class Program
         try
         {
             var text = File.ReadAllText("input.txt");
-            var sum = CorruptedSumOfMultiplies(text);
+            var sum1 = CorruptedSumOfMultiplies(text);
 
-            if (sum == null)
-                Console.WriteLine("No matches");
+            if (sum1 == null)
+                Console.WriteLine("Part1 - No matches");
             else
-                Console.WriteLine($"Sum of multiplies = {sum.Value}");
+                Console.WriteLine($"Part1 - Sum of multiplies = {sum1.Value}");
+
+            var sum2 = CorruptedSumOfMultiplies2(text);
+            if (sum2 == null)
+                Console.WriteLine("Part2 - No matches");
+            else
+                Console.WriteLine($"Part2 - Sum of multiplies = {sum2.Value}");
 
             return 0;
         }
