@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Day03;
@@ -55,8 +57,61 @@ public class Program
 
     }
 
-    public static int? CorruptedSumOfMultiplies2(string data) 
+    public static int? CorruptedSumOfMultiplies2(string data)
     {
-        throw new NotImplementedException();
+        Regex pattern = new Regex(@"mul\((\d{1,3}),(\d{1,3})\)");
+
+
+        int startIndex = 0;
+        bool exclude = false;
+        int sum = 0;
+        bool hasValue = false;
+
+        while (startIndex < data.Length)
+        {
+            var index = data.IndexOf("do", startIndex, StringComparison.Ordinal);
+
+            int len, nextStartIndex;
+            bool nextExclude;
+            if ( index > 0 )
+            {
+                len = index - startIndex;
+                nextExclude = data.AsSpan(index).StartsWith("don't", StringComparison.Ordinal);
+                nextStartIndex = index + ((nextExclude) ? 5 : 2);
+            } 
+            else
+            {
+                len = data.Length - startIndex;
+                nextExclude = true;
+                nextStartIndex = data.Length;
+            }
+
+
+
+            if (! exclude)
+            {
+                var matches = pattern.Matches(data.Substring(startIndex, len));
+                foreach (Match match in matches)
+                {
+                    var groups = match.Groups;
+                    var p1 = int.Parse(groups[1].ValueSpan);
+                    var p2 = int.Parse(groups[2].ValueSpan);
+
+                    hasValue = true;
+                    sum += p1 * p2;
+
+                }
+            }
+
+            startIndex = nextStartIndex;
+            exclude = nextExclude;
+
+
+        } 
+
+
+        return hasValue ? sum : null;
+
     }
+
 }
