@@ -49,4 +49,9 @@ public class Program
         return hasValue ? sum : null;
 
     }
+
+    public static int? CorruptedSumOfMultiplies2(string data) 
+    {
+        throw new NotImplementedException();
+    }
 }
