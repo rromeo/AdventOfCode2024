@@ -7,9 +7,25 @@ namespace Day03;
 public class Program
 {
 
-    static void Main(string[] args)
+    static int Main(string[] args)
     {
+        try
+        {
+            var text = File.ReadAllText("input.txt");
+            var sum = CorruptedSumOfMultiplies(text);
 
+            if (sum == null)
+                Console.WriteLine("No matches");
+            else
+                Console.WriteLine($"Sum of multiplies = {sum.Value}");
+
+            return 0;
+        }
+        catch (Exception ex) 
+        { 
+            Console.Error.WriteLine(ex.Message);
+            return ex.HResult;
+        }
     }
 
     public static int? CorruptedSumOfMultiplies(string data)
