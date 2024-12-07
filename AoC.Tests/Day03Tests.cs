@@ -17,7 +17,8 @@ public class Day03Tests
     [DataRow("mul(6,9!", null)]
     [DataRow("?(12,34)", null)]
     [DataRow("mul( 2 , 4 )", null)]
-    public void TestMethod1(string data, int result)
+    [DataRow("xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))", 161)]
+    public void TestMethod1(string data, int? result)
     {
         Assert.IsTrue(Day03.Program.CorruptedSumOfMultiplies(data) == result);
         
