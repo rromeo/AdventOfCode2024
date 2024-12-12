@@ -163,7 +163,11 @@ public class Program
 
 
         return count;
-
-
     }
+
+    public static int Count_X_Occurences(string[] lines, string word)
+    {
+        throw new NotImplementedException();
+    }
+
 }

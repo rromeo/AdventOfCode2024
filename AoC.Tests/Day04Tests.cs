@@ -44,6 +44,20 @@ S.S.S.S.SS
 .X.X.XMASX
 ";
 
+        const string part2Data =
+@"
+.M.S......
+..A..MSMS.
+.M.S.MAA..
+..A.ASMSM.
+.M.S.M....
+..........
+S.S.S.S.S.
+.A.A.A.A..
+M.M.M.M.M.
+..........
+";
+
         string[] ParseData(string data)
         {
             var lines = new List<string>();
@@ -98,5 +112,13 @@ S.S.S.S.SS
             Assert.IsTrue(Day04.Program.CountOccurences(ParseData(sampleData1), "XMAS") == 18);
             Assert.IsTrue(Day04.Program.CountOccurences(ParseData(sampleData2), "XMAS") == 18);
         }
+
+        [TestMethod]
+        public void Part2()
+        {
+            Assert.IsTrue(Day04.Program.CountOccurences(ParseData(part2Data), "MAS") == 9);
+        }
+
+
     }
 }
