@@ -116,7 +116,7 @@ M.M.M.M.M.
         [TestMethod]
         public void Part2()
         {
-            Assert.IsTrue(Day04.Program.CountOccurences(ParseData(part2Data), "MAS") == 9);
+            Assert.IsTrue(Day04.Program.Count_X_Occurences(ParseData(part2Data), "MAS") == 9);
         }
 
 
