@@ -165,9 +165,60 @@ public class Program
         return count;
     }
 
+    static bool IsOnLtrDiagonal(string[] lines, int row, int col, string word)
+    {
+        for (int i = 0; i < word.Length; i++)
+        {
+            if (lines[row + i][col + i] != word[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    static bool IsOnRtlDiagonal(string[] lines, int row, int col, string word)
+    {
+        for (int i = 0; i < word.Length; i++)
+        {
+            if (lines[row + i][col - i] != word[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    public static bool IsXWord(string[] lines, int row, int col, string word)
+    {
+        var wordRev = new string(word.Reverse().ToArray());
+
+        bool isOnLtrDiagonal = IsOnLtrDiagonal(lines, row, col, word) || IsOnLtrDiagonal(lines, row, col, wordRev);
+        if (!isOnLtrDiagonal)
+            return false;
+
+        bool isOnRtlDiagonal = IsOnRtlDiagonal(lines, row, col+word.Length-1, word) || IsOnRtlDiagonal(lines, row, col+word.Length-1, wordRev);
+
+        return isOnRtlDiagonal;
+
+    }
+
     public static int Count_X_Occurences(string[] lines, string word)
     {
-        throw new NotImplementedException();
+        var wordRev = new string(word.Reverse().ToArray());
+
+        int count = 0;
+        for (int row = 0; row < lines.Length - word.Length + 1; row++)
+        {
+            for (int col = 0; col < lines[row].Length - word.Length + 1; col++)
+            {
+                if (lines[row][col] == word[0] || lines[row][col] == wordRev[0])
+                {
+                    if (IsXWord(lines, row, col, word))
+                        count++;
+                } 
+            } 
+        }
+
+        return count;
     }
 
 }
