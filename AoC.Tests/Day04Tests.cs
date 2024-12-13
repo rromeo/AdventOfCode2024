@@ -44,7 +44,14 @@ S.S.S.S.SS
 .X.X.XMASX
 ";
 
-        const string part2Data =
+        const string part2Data1 =
+@"
+M.S
+.A.
+M.S
+";
+
+        const string part2Data2 =
 @"
 .M.S......
 ..A..MSMS.
@@ -109,14 +116,16 @@ M.M.M.M.M.
         [TestMethod]
         public void Part1()
         {
-            Assert.IsTrue(Day04.Program.CountOccurences(ParseData(sampleData1), "XMAS") == 18);
-            Assert.IsTrue(Day04.Program.CountOccurences(ParseData(sampleData2), "XMAS") == 18);
+            Assert.AreEqual(18, Day04.Program.CountOccurences(ParseData(sampleData1), "XMAS"));
+            Assert.AreEqual(18, Day04.Program.CountOccurences(ParseData(sampleData2), "XMAS"));
         }
+
 
         [TestMethod]
         public void Part2()
         {
-            Assert.IsTrue(Day04.Program.Count_X_Occurences(ParseData(part2Data), "MAS") == 9);
+            Assert.AreEqual(1, Day04.Program.Count_X_Occurences(ParseData(part2Data1), "MAS"));
+            Assert.AreEqual(9, Day04.Program.Count_X_Occurences(ParseData(part2Data2), "MAS"));
         }
 
 
