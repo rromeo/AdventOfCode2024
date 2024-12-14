@@ -9,49 +9,65 @@ namespace Day05;
 
 public class Program
 {
-    static async Task Main(string[] args)
+    static async Task<int> Main(string[] args)
     {
-        var data = await File.ReadAllLinesAsync("input.txt");
+        try
+        {
+            string data = await File.ReadAllTextAsync("input.txt");
+            int result = ComputeMiddleSum(data);
 
-        Console.WriteLine("Hello, World!");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine(ex);
+            return 1;
+        }
+
     }
 
 
-    public static async Task<(List<List<int>> PageOrderRules, List<List<int>> PrintList)> ParseLinesAsync()
+    public static (List<List<int>> PageOrderRules, List<List<int>> PrintList) ParseLines(string data)
     {
-        var data = await File.ReadAllLinesAsync("input.txt");
-        
+       
         var PageOrderRules = new List<List<int>>();
         var PrintList = new List<List<int>>();
 
-        int i = 0;
-        for(; i < data.Length; i++ )
+        using(StringReader reader = new StringReader(data))
         {
-            if (string.IsNullOrEmpty(data[i])) 
-                break;
-            var order = data[i].Split('|');
-            var orderList = order.Select(x => int.Parse(x)).ToList();
-            PageOrderRules.Add(orderList);
+            string? line;
+            while( (line = reader.ReadLine()) != null) 
+            {
+                if (string.IsNullOrEmpty(line)) 
+                    break;
+                var order = line.Split('|');
+                var orderList = order.Select(x => int.Parse(x)).ToList();
+                PageOrderRules.Add(orderList);
+            }
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (string.IsNullOrEmpty(line))
+                    break;
+                // get the csv data
+                var csv = line.Split(',');
+                var csvList = csv.Select(x => int.Parse(x)).ToList();
+
+                PrintList.Add(csvList);
+            }
+
         }
 
-        i++;
-        for (; i < data.Length; i++) 
-        {
-            if (string.IsNullOrEmpty(data[i]))
-                break;
-
-            // get the csv data
-            var csv = data[i].Split(',');
-            var csvList = csv.Select(x => int.Parse(x)).ToList();
-
-            PrintList.Add(csvList);
-        }
 
         return (PageOrderRules, PrintList);
     }
 
     public static int ComputeMiddleSum(string data)
     {
-        throw new NotImplementedException();
+        var (rules, printList) = ParseLines(data);
+
+        return 0;
+
     }
+
 }
