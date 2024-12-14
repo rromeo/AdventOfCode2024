@@ -19,6 +19,10 @@ public class Program
             var count = CountOccurences(data, word);
             Console.WriteLine($"There are {count} occurences of '{word}' in the input");
 
+            var xword = "MAS";
+            var xcount = Count_X_Occurences(data, xword);
+            Console.WriteLine($"There are {xcount} occurences of '{xword}' in the input");
+
             return 0;
         }
         catch (Exception ex)

@@ -122,10 +122,11 @@ M.M.M.M.M.
 
 
         [TestMethod]
-        public void Part2()
+        [DataRow(part2Data1,"MAS",1)]
+        [DataRow(part2Data2, "MAS", 9)]
+        public void Part2(string data, string word, int expected)
         {
-            Assert.AreEqual(1, Day04.Program.Count_X_Occurences(ParseData(part2Data1), "MAS"));
-            Assert.AreEqual(9, Day04.Program.Count_X_Occurences(ParseData(part2Data2), "MAS"));
+            Assert.AreEqual(expected, Day04.Program.Count_X_Occurences(ParseData(data), word));
         }
 
 
